@@ -2,7 +2,10 @@ import React from "react";
 
 function NotFound(){
     return(
-        <p>Page not found</p>
+        <div
+         data-cy="not-found-wrapper">
+            <p>Page not found</p>
+        </div>
     );
 };
 

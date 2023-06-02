@@ -2,7 +2,9 @@ import React from "react";
 
 function AllSet(){
      return(
-        <p>All set</p>
+      <div data-cy="all-set">
+         <p>All set</p>
+      </div>
      );
 }
 

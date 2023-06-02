@@ -2,7 +2,9 @@ import React from "react";
 
 const Study = () => {
     return(
-        <p>Study</p>
+        <div data-cy="study" className="study"> 
+            <p>Study</p>
+        </div>
     )
 }
 

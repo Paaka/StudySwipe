@@ -2,7 +2,9 @@ import React from "react";
 
 function Set(){
     return(
-        <p>Set in future here</p>
+        <div data-cy="set" className="set">
+            <p>Set page</p>
+        </div>
     )
 }
 
