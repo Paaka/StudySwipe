@@ -8,8 +8,8 @@ const AllSet = (): JSX.Element => {
   const [newSet, setNewSet] = useState('');
   const [sets, setSets] = useState<SetCard[]>([]);
 
-  const createNewSet = () => {
-    setSets([{ title: newSet }, ...sets]);
+  const createNewSet = (name: string) => {
+    setSets([{ title: name }, ...sets]);
     setNewSet('');
   };
 
@@ -24,7 +24,7 @@ const AllSet = (): JSX.Element => {
           </Link>
         ))
       )}
-      <NewSetDialogForm></NewSetDialogForm>
+      <NewSetDialogForm createNewSet={createNewSet}></NewSetDialogForm>
     </div>
   );
 };

@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 
-const NewSetDialogForm = () => {
+const NewSetDialogForm = (props: any) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [newSet, setNewSet] = useState('');
 
@@ -21,6 +21,8 @@ const NewSetDialogForm = () => {
   };
 
   const onSaveHandlder = (): void => {
+    console.log(props.createNewSet(newSet));
+
     //TO DO: pass higher inoformation;
     onCloseHandler();
   };
