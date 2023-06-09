@@ -6,10 +6,10 @@ import NewSetDialogForm from '../../components/newSetDialogForm/newSetDialogForm
 
 const AllSet = (): JSX.Element => {
   const [newSet, setNewSet] = useState('');
-  const [sets, setSets] = useState<SetCard[]>([]);
+  const [sets, setSets] = useState<SetCard[]>([{ id: 0, title: 'Test' }]);
 
   const createNewSet = (name: string) => {
-    setSets([{ title: name }, ...sets]);
+    setSets([{ id: sets.length, title: name }, ...sets]);
     setNewSet('');
   };
 
@@ -19,7 +19,7 @@ const AllSet = (): JSX.Element => {
         <p> You don't have any cards 💔</p>
       ) : (
         sets.map((set: SetCard, i: number) => (
-          <Link to={'/set'} key={i}>
+          <Link to={`/set/${set.id}`} key={i}>
             <Card data-cy="set-card">{set.title}</Card>
           </Link>
         ))

@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import AllSet from './pages/allSets/AllSet'
+import AllSet from './pages/allSets/AllSet';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { BrowserRouter as Router,  Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NotFound from './pages/notFound/NotFound';
 import Set from './pages/set/Set';
 import Study from './pages/study/Study';
@@ -22,11 +22,11 @@ root.render(
       <CssBaseline />
       <Router>
         <Routes>
-          <Route path='/' element={<App/>} />
-          <Route path='/all' element={<AllSet/>} />
-          <Route path='/set' element={<Set/>} />
-          <Route path='/set/:id' element={<Study/>} />
-          <Route path='*' element={<NotFound/>} />
+          <Route path="/" element={<App />} />
+          <Route path="/all" element={<AllSet />} />
+          <Route path="/set/:setID" element={<Set />} />
+          <Route path="/set/:setID/:id" element={<Study />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </ThemeProvider>
