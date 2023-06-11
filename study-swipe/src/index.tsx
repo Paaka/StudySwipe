@@ -10,6 +10,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NotFound from './pages/notFound/NotFound';
 import Set from './pages/set/Set';
 import Study from './pages/study/Study';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -18,18 +20,20 @@ const root = ReactDOM.createRoot(
 const theme = createTheme();
 root.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Router>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="/all" element={<AllSet />} />
-          <Route path="/set/:setID" element={<Set />} />
-          <Route path="/set/:setID/:id" element={<Study />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Router>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Router>
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="/all" element={<AllSet />} />
+            <Route path="/set/:setID" element={<Set />} />
+            <Route path="/set/:setID/:id" element={<Study />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Router>
+      </ThemeProvider>
+    </Provider>
   </React.StrictMode>
 );
 

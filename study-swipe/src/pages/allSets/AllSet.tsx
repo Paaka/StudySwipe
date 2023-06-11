@@ -3,14 +3,24 @@ import { Link } from 'react-router-dom';
 import { Button, Card, Input } from '@mui/material';
 import { SetCard } from '../../models/set-card.interface';
 import NewSetDialogForm from '../../components/newSetDialogForm/newSetDialogForm';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { increment } from '../../redux/actions';
 
 const AllSet = (): JSX.Element => {
+  const count = useSelector((state: any) => state.counter.count);
+  const dispatch = useDispatch();
+
   const [newSet, setNewSet] = useState('');
   const [sets, setSets] = useState<SetCard[]>([{ id: 0, title: 'Test' }]);
 
   const createNewSet = (name: string) => {
     setSets([{ id: sets.length, title: name }, ...sets]);
     setNewSet('');
+  };
+
+  const onClickHandler = (): void => {
+    dispatch(increment());
   };
 
   return (
@@ -24,6 +34,10 @@ const AllSet = (): JSX.Element => {
           </Link>
         ))
       )}
+      <h1>{count}</h1>
+      <Button variant="outlined" onClick={onClickHandler}>
+        Increment
+      </Button>
       <NewSetDialogForm createNewSet={createNewSet}></NewSetDialogForm>
     </div>
   );
