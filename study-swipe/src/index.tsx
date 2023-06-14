@@ -12,6 +12,7 @@ import Set from './pages/set/Set';
 import Study from './pages/study/Study';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import EditSet from './pages/editSet/editSet';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -28,6 +29,7 @@ root.render(
             <Route path="/" element={<App />} />
             <Route path="/all" element={<AllSet />} />
             <Route path="/set/:setID" element={<Set />} />
+            <Route path="/set/:setID/edit" element={<EditSet />} />
             <Route path="/set/:setID/:id" element={<Study />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

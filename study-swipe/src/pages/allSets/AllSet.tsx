@@ -1,22 +1,18 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Card, Input } from '@mui/material';
+import { Card } from '@mui/material';
 import { SetCard } from '../../models/set-card.interface';
 import NewSetDialogForm from '../../components/newSetDialogForm/newSetDialogForm';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { addSet, increment } from '../../redux/actions';
-import { ApplicationState } from '../../redux/reducers';
+import { addSet } from '../../redux/actions';
 
 const AllSet = (): JSX.Element => {
   const sets = useSelector((state: any) => state.counter.sets);
   const dispatch = useDispatch();
 
-  const [newSet, setNewSet] = useState('');
-
   const createNewSet = (name: string) => {
     dispatch(addSet({ id: sets.length, title: name }));
-    setNewSet('');
   };
 
   return (

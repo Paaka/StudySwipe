@@ -22,8 +22,6 @@ const NewSetDialogForm = (props: any) => {
 
   const onSaveHandlder = (): void => {
     console.log(props.createNewSet(newSet));
-
-    //TO DO: pass higher inoformation;
     onCloseHandler();
   };
 
