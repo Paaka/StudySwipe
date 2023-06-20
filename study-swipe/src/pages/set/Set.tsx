@@ -1,10 +1,12 @@
-import { Button, Card, Input } from '@mui/material';
+import { Button, Card, IconButton, Input } from '@mui/material';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IFlashcard } from '../../models/flashcard.interface';
 import './Set.scss';
 import DialogForm from '../../components/dialogForm/dialogForm';
-import { event } from 'cypress/types/jquery';
+import AddIcon from '@mui/icons-material/Add';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import { Add } from '@mui/icons-material';
 
 const Set = () => {
   const [keyword, setKeyword] = useState('');
@@ -55,16 +57,30 @@ const Set = () => {
         </div>
       </DialogForm>
       <div className="wrapper">
+        <div className="wrapper__first-row">
+          <IconButton size="large" color="primary">
+            <AddIcon></AddIcon>
+          </IconButton>
+          <Link to={'edit'}>
+            <IconButton size="large" color="primary">
+              <ModeEditIcon></ModeEditIcon>
+            </IconButton>
+          </Link>
+        </div>
         <div className="wrapper__list">
           <h1>Keyword</h1>
           {flashCards.map((flashCard, i) => (
-            <Card key={i}>{flashCard.keyword}</Card>
+            <Card className="wrapper__list__item" key={i}>
+              {flashCard.keyword}
+            </Card>
           ))}
         </div>
         <div className="wrapper__list">
           <h1>Definition</h1>
           {flashCards.map((flashCard, i) => (
-            <Card key={i}>{flashCard.definition}</Card>
+            <Card className="wrapper__list__item" key={i}>
+              {flashCard.definition}
+            </Card>
           ))}
         </div>
       </div>
