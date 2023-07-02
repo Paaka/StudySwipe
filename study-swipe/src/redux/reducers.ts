@@ -8,19 +8,23 @@ import {
 import { SetCard } from '../models/set-card.interface';
 
 export interface ApplicationState {
+  setsReducer: ISetsState;
+}
+
+export interface ISetsState {
   count: number;
   sets: SetCard[];
 }
 
-const initialState: ApplicationState = {
+const initialState: ISetsState = {
   count: 0,
   sets: [{ id: 0, title: 'Example Set' }],
 };
 
 const counterReducer = (
-  state: ApplicationState = initialState,
+  state: ISetsState = initialState,
   action: IncrementAction | DecrementAction | AddSetAction
-): ApplicationState => {
+): ISetsState => {
   switch (action.type) {
     case ActionTypes.INCREMENT:
       return {
@@ -45,7 +49,7 @@ const counterReducer = (
 };
 
 const rootReducer = combineReducers({
-  counter: counterReducer,
+  setsReducer: counterReducer,
 });
 
 export default rootReducer;

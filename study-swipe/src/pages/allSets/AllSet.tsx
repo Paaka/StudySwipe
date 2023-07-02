@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { addSet } from '../../redux/actions';
 
 const AllSet = (): JSX.Element => {
-  const sets = useSelector((state: any) => state.counter.sets);
+  const sets = useSelector((state: any) => state.sets.sets);
   const dispatch = useDispatch();
 
   const createNewSet = (name: string) => {
