@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
-import { ApplicationState, ISetsState } from '../../redux/reducers';
+import { ApplicationState } from '../../models/state.interfaces';
 
 const EditSet = () => {
   const sets = useSelector((state: ApplicationState) => state.setsReducer.sets);

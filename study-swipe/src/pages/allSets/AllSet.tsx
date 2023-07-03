@@ -6,13 +6,14 @@ import NewSetDialogForm from '../../components/newSetDialogForm/newSetDialogForm
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { addSet } from '../../redux/actions';
+import { ApplicationState } from '../../models/state.interfaces';
 
 const AllSet = (): JSX.Element => {
-  const sets = useSelector((state: any) => state.sets.sets);
+  const sets = useSelector((state: ApplicationState) => state.setsReducer.sets);
   const dispatch = useDispatch();
 
   const createNewSet = (name: string) => {
-    dispatch(addSet({ id: sets.length, title: name }));
+    dispatch(addSet({ id: sets.length, title: name, flashcards:[] }));
   };
 
   return (
