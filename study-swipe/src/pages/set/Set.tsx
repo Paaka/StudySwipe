@@ -1,23 +1,32 @@
 import { Button, Card, IconButton, Input } from '@mui/material';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { IFlashcard } from '../../models/flashcard.interface';
 import './Set.scss';
 import DialogForm from '../../components/dialogForm/dialogForm';
 import AddIcon from '@mui/icons-material/Add';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import { Add } from '@mui/icons-material';
+import { useSelector } from 'react-redux';
+import { ApplicationState } from '../../models/state.interfaces';
+import { SetCard } from '../../models/set-card.interface';
+import { useDispatch } from 'react-redux';
+import { addFlashCard } from '../../redux/actions';
 
 const Set = () => {
   const [keyword, setKeyword] = useState('');
   const [definition, setDefinition] = useState('');
 
-  const [flashCards, setFlashCards] = useState<IFlashcard[]>([
-    { id: '0', keyword: 'Subaru 22B', definition: 'Best car ever produced' },
-  ]);
+  const dispatch = useDispatch();
+  const setId: number = Number(useLocation().pathname.split('/')[2]);
+  const sets = useSelector<ApplicationState, SetCard>(state => state.setsReducer.sets[setId]) as SetCard;
+
+
 
   const onSaveCallback = () => {
-    setFlashCards([...flashCards, { id: '1', keyword, definition }]);
+    dispatch(addFlashCard({ id: `unique-${new Date().getMilliseconds}`, keyword, definition }, setId));
+    setKeyword('');
+    setDefinition('');
   };
 
   const onKeyDownHandler = (
@@ -69,16 +78,16 @@ const Set = () => {
         </div>
         <div className="wrapper__list">
           <h1>Keyword</h1>
-          {flashCards.map((flashCard, i) => (
-            <Card className="wrapper__list__item" key={i}>
+          {sets.flashcards.map(flashCard => (
+            <Card className="wrapper__list__item" key={flashCard.id}>
               {flashCard.keyword}
             </Card>
           ))}
         </div>
         <div className="wrapper__list">
           <h1>Definition</h1>
-          {flashCards.map((flashCard, i) => (
-            <Card className="wrapper__list__item" key={i}>
+          {sets.flashcards.map(flashCard => (
+            <Card className="wrapper__list__item" key={flashCard.id}>
               {flashCard.definition}
             </Card>
           ))}
