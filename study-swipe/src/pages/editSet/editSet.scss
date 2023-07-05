@@ -1,0 +1,19 @@
+.editSet{
+    margin: 2rem;
+}
+
+.listWrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+
+    &__card{
+        &:not(:last-child){
+            margin-bottom: 2rem;
+        }
+
+        &__input{
+            width: 100%;
+        }
+    }
+}
