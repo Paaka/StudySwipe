@@ -11,7 +11,11 @@ import { ISetsState } from '../models/state.interfaces';
 
 const setsReducer = (
   state: ISetsState = INITIAL_STATE,
-  action: AddSetAction | AddFlashcardAction | SetFlashcardDefininitionAction | SetFlashcardKeywordAction
+  action:
+    | AddSetAction
+    | AddFlashcardAction
+    | SetFlashcardDefininitionAction
+    | SetFlashcardKeywordAction
 ): ISetsState => {
   switch (action.type) {
     case ActionTypes.ADD_SET: {
@@ -21,21 +25,32 @@ const setsReducer = (
       };
     }
     case ActionTypes.ADD_FLASHCARD: {
-      const [setToBeUpdated] = state.sets.filter(set => set.id === action.setId);
-      setToBeUpdated.flashcards = [action.newFlashCard, ...setToBeUpdated.flashcards];
+      const [setToBeUpdated] = state.sets.filter(
+        (set) => set.id === action.setId
+      );
+      setToBeUpdated.flashcards = [
+        action.newFlashCard,
+        ...setToBeUpdated.flashcards,
+      ];
       return state;
     }
     case ActionTypes.SET_FLASHCARD_KEYWORD: {
-      const [setToBeUpdated] = state.sets.filter(set => set.id === action.setId);
-      const [flashcardToBeUpdated] = setToBeUpdated.flashcards.filter(flashcard => flashcard.id === action.updatedFlashCard.id);
-
-      flashcardToBeUpdated.keyword = action.updatedFlashCard.keyword;
-      state.sets[0].flashcards[0] = { ...flashcardToBeUpdated}
-      console.log(state);
-      return state;
+      return {
+        sets: state.sets.map((set) =>
+          set.id === action.setId
+            ? {
+                ...set,
+                flashcards: set.flashcards.map((flashcard) =>
+                  flashcard.id === action.updatedFlashCard.id
+                    ? { ...action.updatedFlashCard }
+                    : flashcard
+                ),
+              }
+            : set
+        ),
+      };
     }
     default:
-      
       return state;
   }
 };
