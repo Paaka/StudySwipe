@@ -25,16 +25,31 @@ const setsReducer = (
       };
     }
     case ActionTypes.ADD_FLASHCARD: {
-      const [setToBeUpdated] = state.sets.filter(
-        (set) => set.id === action.setId
-      );
-      setToBeUpdated.flashcards = [
-        action.newFlashCard,
-        ...setToBeUpdated.flashcards,
-      ];
-      return state;
+      return {
+        sets: state.sets.map((set) =>
+          set.id === action.setId
+            ? { ...set, flashcards: [...set.flashcards, action.newFlashCard] }
+            : set
+        ),
+      };
     }
     case ActionTypes.SET_FLASHCARD_KEYWORD: {
+      return {
+        sets: state.sets.map((set) =>
+          set.id === action.setId
+            ? {
+                ...set,
+                flashcards: set.flashcards.map((flashcard) =>
+                  flashcard.id === action.updatedFlashCard.id
+                    ? { ...action.updatedFlashCard }
+                    : flashcard
+                ),
+              }
+            : set
+        ),
+      };
+    }
+    case ActionTypes.SET_FLASHCARD_DEFINITION: {
       return {
         sets: state.sets.map((set) =>
           set.id === action.setId
