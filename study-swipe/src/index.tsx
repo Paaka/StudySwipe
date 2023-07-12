@@ -30,7 +30,7 @@ root.render(
             <Route path="/all" element={<AllSet />} />
             <Route path="/set/:setID" element={<Set />} />
             <Route path="/set/:setID/edit" element={<EditSet />} />
-            <Route path="/set/:setID/:id" element={<Study />} />
+            <Route path="/set/:setID/:index/:action" element={<Study />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>

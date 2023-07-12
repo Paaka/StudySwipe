@@ -19,12 +19,17 @@ const Set = () => {
 
   const dispatch = useDispatch();
   const setId: number = Number(useLocation().pathname.split('/')[2]);
-  const sets = useSelector<ApplicationState, SetCard>(state => state.setsReducer.sets[setId]) as SetCard;
-
-
+  const sets = useSelector<ApplicationState, SetCard>(
+    (state) => state.setsReducer.sets[setId]
+  ) as SetCard;
 
   const onSaveCallback = () => {
-    dispatch(addFlashCard({ id: `unique-${new Date().getMilliseconds}`, keyword, definition }, setId));
+    dispatch(
+      addFlashCard(
+        { id: `unique-${new Date().getMilliseconds}`, keyword, definition },
+        setId
+      )
+    );
     setKeyword('');
     setDefinition('');
   };
@@ -78,18 +83,22 @@ const Set = () => {
         </div>
         <div className="wrapper__list">
           <h1>Keyword</h1>
-          {sets.flashcards.map(flashCard => (
-            <Card className="wrapper__list__item" key={flashCard.id}>
-              {flashCard.keyword}
-            </Card>
+          {sets.flashcards.map((flashCard, i) => (
+            <Link key={flashCard.id} to={`/set/${setId}/${i}/keyword`}>
+              <Card className="wrapper__list__item" key={flashCard.id}>
+                {flashCard.keyword}
+              </Card>
+            </Link>
           ))}
         </div>
         <div className="wrapper__list">
           <h1>Definition</h1>
-          {sets.flashcards.map(flashCard => (
-            <Card className="wrapper__list__item" key={flashCard.id}>
-              {flashCard.definition}
-            </Card>
+          {sets.flashcards.map((flashCard, i) => (
+            <Link key={flashCard.id} to={`/set/${setId}/${i}/definition`}>
+              <Card className="wrapper__list__item">
+                {flashCard.definition}
+              </Card>
+            </Link>
           ))}
         </div>
       </div>
