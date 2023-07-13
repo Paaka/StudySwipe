@@ -10,17 +10,29 @@ const Study = () => {
 
   const location = useLocation().pathname.split('/');
 
-  const sets = useSelector<ApplicationState, ISetsState>(
+  const state = useSelector<ApplicationState, ISetsState>(
     (state) => state.setsReducer
   );
 
-  //   const set: number = Number(location[2]);
-  //   const flashCardIndex = location[3];
-  //   const keyword = location[4];
+  const setID: number = Number(location[2]);
+  const flashCardIndex = Number(location[3]);
+  const keyword: string = location[4];
+
+  const currentFlashcard = state.sets[setID].flashcards[flashCardIndex];
+  const currentKeyword = location[4];
+
+  //@ts-ignore
+  const test2 = currentFlashcard[currentKeyword];
+  let speach = new SpeechSynthesisUtterance(test2);
+
+  const test = () => {
+    window.speechSynthesis.speak(speach);
+  };
 
   return (
     <div data-cy="study" className="study">
-      <p>XD</p>
+      <p>{test2}</p>
+      <button onClick={test}>Click me</button>
     </div>
   );
 };
