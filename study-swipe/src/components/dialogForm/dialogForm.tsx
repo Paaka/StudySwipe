@@ -4,17 +4,19 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  IconButton,
 } from '@mui/material';
 import React, { ReactElement, useState } from 'react';
+import AddIcon from '@mui/icons-material/Add';
 
 interface IButtonProps {
   children: ReactElement;
-  buttonTitle: string;
+  buttonTitle?: string | null;
   dialogTitle: string;
   onSaveCallback: () => void;
 }
 
-const DialogForm = (props: IButtonProps) => {
+const DialogForm = (props: IButtonProps, childen: JSX.Element) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const onButtonClickedHandler = () => {
@@ -40,10 +42,19 @@ const DialogForm = (props: IButtonProps) => {
           <Button onClick={onCancelHandler}>Cancel</Button>
         </DialogActions>
       </Dialog>
-      <Button variant="contained" onClick={onButtonClickedHandler}>
-        {props.buttonTitle}
-      </Button>
-      ;
+      {props.buttonTitle ? (
+        <Button variant="contained" onClick={onButtonClickedHandler}>
+          {props.buttonTitle}
+        </Button>
+      ) : (
+        <IconButton
+          size="large"
+          color="primary"
+          onClick={onButtonClickedHandler}
+        >
+          <AddIcon></AddIcon>
+        </IconButton>
+      )}
     </>
   );
 };

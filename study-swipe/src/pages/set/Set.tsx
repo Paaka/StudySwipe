@@ -43,38 +43,31 @@ const Set = () => {
 
   return (
     <div data-cy="set" className="set">
-      <Link to="/set/3/2">
-        <Button>Go to specyfic button</Button>
-      </Link>
-      <DialogForm
-        buttonTitle="Add set"
-        dialogTitle="Add new flashcard"
-        onSaveCallback={onSaveCallback}
-      >
-        <div className="form-column">
-          <Input
-            placeholder="Keyword"
-            onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
-              onKeyDownHandler(e, setKeyword)
-            }
-            value={keyword}
-            required
-          ></Input>
-          <Input
-            placeholder="Definition"
-            onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
-              onKeyDownHandler(e, setDefinition)
-            }
-            value={definition}
-            required
-          ></Input>
-        </div>
-      </DialogForm>
       <div className="wrapper">
         <div className="wrapper__first-row">
-          <IconButton size="large" color="primary">
-            <AddIcon></AddIcon>
-          </IconButton>
+          <DialogForm
+            dialogTitle="Add new flashcard"
+            onSaveCallback={onSaveCallback}
+          >
+            <div className="form-column">
+              <Input
+                placeholder="Keyword"
+                onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  onKeyDownHandler(e, setKeyword)
+                }
+                value={keyword}
+                required
+              ></Input>
+              <Input
+                placeholder="Definition"
+                onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  onKeyDownHandler(e, setDefinition)
+                }
+                value={definition}
+                required
+              ></Input>
+            </div>
+          </DialogForm>
           <Link to={'edit'}>
             <IconButton size="large" color="primary">
               <ModeEditIcon></ModeEditIcon>

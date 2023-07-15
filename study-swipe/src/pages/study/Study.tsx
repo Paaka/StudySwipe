@@ -2,17 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { ApplicationState, ISetsState } from '../../models/state.interfaces';
-import { SetCard } from '../../models/set-card.interface';
 import { Link, useLocation } from 'react-router-dom';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  Icon,
-  IconButton,
-  Typography,
-} from '@mui/material';
+import { Card, CardContent, IconButton, Typography } from '@mui/material';
 import { VolumeUp } from '@mui/icons-material';
+import AddIcon from '@mui/icons-material/Add';
 
 const Study = () => {
   const dispatch = useDispatch();
@@ -38,9 +31,13 @@ const Study = () => {
     window.speechSynthesis.speak(speach);
   };
 
+  const getlinkToReturn = () => {
+    return `/set/${setID}`;
+  };
+
   return (
     <>
-      <Link to="/set/0">Go back</Link>
+      <Link to={getlinkToReturn()}>Go back</Link>
       <div data-cy="study" className="study">
         <Card>
           <Typography variant="h6">{currentKeyword}</Typography>
