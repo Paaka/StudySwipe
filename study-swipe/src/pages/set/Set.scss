@@ -17,8 +17,18 @@
   &__list {
     margin: 1rem;
 
-    &__item:not(:first-child) {
-      margin: 0.5rem 0 0 0;
+    &__item {
+      background-color: blue;
+      padding: 50px;
+      margin: 20px;
+
+      a {
+        text-decoration: none;
+      }
+    }
+
+    &__card {
+      background-color: red;
     }
   }
 }
@@ -26,4 +36,15 @@
 .form-column {
   display: flex;
   flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.listItem {
+  &:not(:first-child) {
+    margin-top: 0.5rem;
+  }
 }

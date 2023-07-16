@@ -1,4 +1,11 @@
-import { Button, Card, IconButton, Input } from '@mui/material';
+import {
+  Button,
+  Card,
+  IconButton,
+  Input,
+  Typography,
+  makeStyles,
+} from '@mui/material';
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { IFlashcard } from '../../models/flashcard.interface';
@@ -7,6 +14,7 @@ import DialogForm from '../../components/dialogForm/dialogForm';
 import AddIcon from '@mui/icons-material/Add';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import { Add } from '@mui/icons-material';
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import { useSelector } from 'react-redux';
 import { ApplicationState } from '../../models/state.interfaces';
 import { SetCard } from '../../models/set-card.interface';
@@ -43,6 +51,14 @@ const Set = () => {
 
   return (
     <div data-cy="set" className="set">
+      <div className="header">
+        <Typography variant="h4">{sets.title}</Typography>
+        <Link to="/all">
+          <IconButton size="large" color="primary">
+            <KeyboardReturnIcon></KeyboardReturnIcon>
+          </IconButton>
+        </Link>
+      </div>
       <div className="wrapper">
         <div className="wrapper__first-row">
           <DialogForm
@@ -75,23 +91,25 @@ const Set = () => {
           </Link>
         </div>
         <div className="wrapper__list">
-          <h1>Keyword</h1>
+          <Typography variant="h5">Keyword</Typography>
           {sets.flashcards.map((flashCard, i) => (
-            <Link key={flashCard.id} to={`/set/${setId}/${i}/keyword`}>
-              <Card className="wrapper__list__item" key={flashCard.id}>
-                {flashCard.keyword}
-              </Card>
-            </Link>
+            <div className="listItem" key={flashCard.id}>
+              <Link to={`/set/${setId}/${i}/keyword`}>
+                <Card className="wrappper__list__card">
+                  {flashCard.keyword}
+                </Card>
+              </Link>
+            </div>
           ))}
         </div>
         <div className="wrapper__list">
-          <h1>Definition</h1>
+          <Typography variant="h5">Definition</Typography>
           {sets.flashcards.map((flashCard, i) => (
-            <Link key={flashCard.id} to={`/set/${setId}/${i}/definition`}>
-              <Card className="wrapper__list__item">
-                {flashCard.definition}
-              </Card>
-            </Link>
+            <div className="listItem" key={flashCard.id}>
+              <Link to={`/set/${setId}/${i}/definition`}>
+                <Card>{flashCard.definition}</Card>
+              </Link>
+            </div>
           ))}
         </div>
       </div>
