@@ -16,7 +16,7 @@ interface IButtonProps {
   onSaveCallback: () => void;
 }
 
-const DialogForm = (props: IButtonProps, childen: JSX.Element) => {
+const DialogForm = (props: IButtonProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const onButtonClickedHandler = () => {

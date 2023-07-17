@@ -1,7 +1,6 @@
-import React, { FormEvent } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { Button, Card, Input } from '@mui/material';
 import './editSet.scss';
 import { ApplicationState } from '../../models/state.interfaces';

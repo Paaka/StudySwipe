@@ -1,24 +1,13 @@
-import {
-  Button,
-  Card,
-  IconButton,
-  Input,
-  Typography,
-  makeStyles,
-} from '@mui/material';
+import { Card, IconButton, Input, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { IFlashcard } from '../../models/flashcard.interface';
 import './Set.scss';
 import DialogForm from '../../components/dialogForm/dialogForm';
-import AddIcon from '@mui/icons-material/Add';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
-import { Add } from '@mui/icons-material';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { ApplicationState } from '../../models/state.interfaces';
 import { SetCard } from '../../models/set-card.interface';
-import { useDispatch } from 'react-redux';
 import { addFlashCard } from '../../redux/actions';
 
 const Set = () => {
