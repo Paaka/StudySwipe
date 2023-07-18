@@ -26,6 +26,7 @@ module.exports = {
     'multiline-ternary': 'off',
     'no-unused-vars': ['error', { varsIgnorePattern: 'ActionTypes' }],
     '@typescript-eslint/ban-ts-comment': 'warn',
+    quotes: 'warn',
     // Add any additional rules or overrides here
   },
   settings: {
