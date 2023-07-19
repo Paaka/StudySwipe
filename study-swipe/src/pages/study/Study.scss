@@ -1,0 +1,18 @@
+@keyframes flipCard {
+  0% {
+    transform: rotateX(0);
+  }
+  100% {
+    transform: rotateX(1turn);
+  }
+}
+
+.study-card {
+  padding: 2rem;
+  width: 50%;
+  animation: flipCard 0.5s forwards;
+}
+
+.animate {
+  animation-play-state: running;
+}

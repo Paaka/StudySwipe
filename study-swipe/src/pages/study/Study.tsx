@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { ApplicationState, ISetsState } from '../../models/state.interfaces';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Card, CardContent, IconButton, Typography } from '@mui/material';
 import { VolumeUp } from '@mui/icons-material';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import { ApplicationState, ISetsState } from '../../models/state.interfaces';
+import './Study.scss';
 
 const Study = () => {
   const navigate = useNavigate();
@@ -14,10 +15,37 @@ const Study = () => {
   const flashCardIndex = Number(location[3]);
   const keyword = location[4];
   const [currentKeyword, setCurrentKeyword] = useState(keyword);
+  const [animate, setAnimate] = useState(false);
 
   const state = useSelector<ApplicationState, ISetsState>(
     (state) => state.setsReducer
   );
+
+  const handleKeyDown = (event: React.KeyboardEvent | KeyboardEvent) => {
+    if (event.key === 'ArrowRight') {
+      moveToNextCard();
+    }
+
+    if (event.key === 'ArrowLeft') {
+      moveToPreviousCard();
+    }
+
+    if (event.key === 'Enter') {
+      setAnimate(true);
+      console.log('enter');
+      flipCard();
+    }
+  };
+
+  useEffect(() => {
+    const handleKeyDownEvent = (event: KeyboardEvent) => handleKeyDown(event);
+
+    window.addEventListener('keydown', handleKeyDownEvent);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDownEvent);
+    };
+  }, [location]);
 
   const currentFlashcard = state.sets[setID].flashcards[flashCardIndex];
 
@@ -56,12 +84,20 @@ const Study = () => {
     navigate(`/set/${setID}/${flashCardIndex - 1}/${currentKeyword}`);
   };
 
+  const onAnimationEndHandler = () => {
+    setAnimate(false);
+  };
+
   return (
     <>
       <Link to={getlinkToReturn()}>Go back</Link>
       <div data-cy="study" className="study">
         <h3>{currentKeyword}</h3>
-        <Card onClick={flipCard}>
+        <Card
+          className={`study-card ${animate ? 'animate' : ''}`}
+          onClick={flipCard}
+          onAnimationEnd={onAnimationEndHandler}
+        >
           <Typography variant="h6">{currentKeyword}</Typography>
           <CardContent>
             {currentKeyword === 'keyword' ? (
