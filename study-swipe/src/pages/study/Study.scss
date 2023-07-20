@@ -10,7 +10,10 @@
 .study-card {
   padding: 2rem;
   width: 50%;
-  animation: flipCard 0.5s forwards;
+
+  animation: flipCard 0.5s forwards infinite;
+  animation-play-state: paused;
+  transform: rotateX(0);
 }
 
 .animate {

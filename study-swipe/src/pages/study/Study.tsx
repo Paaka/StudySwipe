@@ -38,14 +38,21 @@ const Study = () => {
   };
 
   useEffect(() => {
+    console.log('test', animate);
     const handleKeyDownEvent = (event: KeyboardEvent) => handleKeyDown(event);
 
     window.addEventListener('keydown', handleKeyDownEvent);
 
+    if (animate) {
+      setTimeout(() => {
+        setAnimate(false);
+      }, 500);
+    }
+
     return () => {
       window.removeEventListener('keydown', handleKeyDownEvent);
     };
-  }, [location]);
+  }, [location, animate]);
 
   const currentFlashcard = state.sets[setID].flashcards[flashCardIndex];
 
@@ -61,6 +68,7 @@ const Study = () => {
   };
 
   const flipCard = () => {
+    setAnimate(true);
     const keyword = currentKeyword === 'keyword' ? 'definition' : 'keyword';
     setCurrentKeyword(keyword);
   };
@@ -84,10 +92,6 @@ const Study = () => {
     navigate(`/set/${setID}/${flashCardIndex - 1}/${currentKeyword}`);
   };
 
-  const onAnimationEndHandler = () => {
-    setAnimate(false);
-  };
-
   return (
     <>
       <Link to={getlinkToReturn()}>Go back</Link>
@@ -96,7 +100,6 @@ const Study = () => {
         <Card
           className={`study-card ${animate ? 'animate' : ''}`}
           onClick={flipCard}
-          onAnimationEnd={onAnimationEndHandler}
         >
           <Typography variant="h6">{currentKeyword}</Typography>
           <CardContent>
