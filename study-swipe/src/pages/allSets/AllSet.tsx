@@ -18,6 +18,7 @@ const AllSet = (): JSX.Element => {
 
   return (
     <div data-cy="all-set">
+      <h2>Your sets:</h2>
       {sets.length === 0 ? (
         <h3> You don&apos;t have any cards 💔</h3>
       ) : (

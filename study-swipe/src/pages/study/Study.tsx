@@ -44,9 +44,7 @@ const Study = () => {
     window.addEventListener('keydown', handleKeyDownEvent);
 
     if (animate) {
-      setTimeout(() => {
-        setAnimate(false);
-      }, 500);
+      setAnimate(false);
     }
 
     return () => {
