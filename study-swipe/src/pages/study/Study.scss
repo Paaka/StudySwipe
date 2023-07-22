@@ -7,9 +7,22 @@
   }
 }
 
+.study {
+  width: 100%;
+  background: red;
+  display: flex;
+}
+
+.study-header {
+  display: flex;
+  padding: 2rem;
+  width: 100%;
+  justify-content: flex-end;
+}
+
 .study-card {
   padding: 2rem;
-  width: 50%;
+  width: 200px;
 
   animation: flipCard 0.5s forwards infinite;
   animation-play-state: paused;

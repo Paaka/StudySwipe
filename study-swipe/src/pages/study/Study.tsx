@@ -6,6 +6,9 @@ import { VolumeUp } from '@mui/icons-material';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import { ApplicationState, ISetsState } from '../../models/state.interfaces';
+import ShuffleIcon from '@mui/icons-material/Shuffle';
+import ShuffleOnIcon from '@mui/icons-material/ShuffleOn';
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import './Study.scss';
 
 const Study = () => {
@@ -16,6 +19,7 @@ const Study = () => {
   const keyword = location[4];
   const [currentKeyword, setCurrentKeyword] = useState(keyword);
   const [animate, setAnimate] = useState(false);
+  const [isShuffleOn, setIsShuffleOn] = useState(false);
 
   const state = useSelector<ApplicationState, ISetsState>(
     (state) => state.setsReducer
@@ -44,7 +48,9 @@ const Study = () => {
     window.addEventListener('keydown', handleKeyDownEvent);
 
     if (animate) {
-      setAnimate(false);
+      setTimeout(() => {
+        setAnimate(false);
+      }, 500);
     }
 
     return () => {
@@ -90,32 +96,52 @@ const Study = () => {
     navigate(`/set/${setID}/${flashCardIndex - 1}/${currentKeyword}`);
   };
 
+  const onShuffleHandler = () => {
+    setIsShuffleOn(!isShuffleOn);
+  };
+
   return (
     <>
-      <Link to={getlinkToReturn()}>Go back</Link>
+      <div className="study-header">
+        <Link to={getlinkToReturn()}>
+          <IconButton color="primary">
+            <KeyboardReturnIcon />
+          </IconButton>
+        </Link>
+      </div>
       <div data-cy="study" className="study">
-        <h3>{currentKeyword}</h3>
-        <Card
-          className={`study-card ${animate ? 'animate' : ''}`}
-          onClick={flipCard}
-        >
-          <Typography variant="h6">{currentKeyword}</Typography>
-          <CardContent>
-            {currentKeyword === 'keyword' ? (
-              <p>{currentFlashcard.keyword}</p>
-            ) : (
-              <p>{currentFlashcard.definition}</p>
-            )}
-          </CardContent>
-        </Card>
-        <IconButton onClick={onSpeakHandler}>
-          <VolumeUp />
-        </IconButton>
         <IconButton onClick={moveToPreviousCard}>
           <NavigateBeforeIcon />
         </IconButton>
+        <div>
+          <h3>{currentKeyword}</h3>
+          <Card
+            className={`study-card ${animate ? 'animate' : ''}`}
+            onClick={flipCard}
+          >
+            <Typography variant="h6">{currentKeyword}</Typography>
+            <CardContent>
+              {currentKeyword === 'keyword' ? (
+                <p>{currentFlashcard.keyword}</p>
+              ) : (
+                <p>{currentFlashcard.definition}</p>
+              )}
+            </CardContent>
+          </Card>
+        </div>
         <IconButton onClick={moveToNextCard}>
           <NavigateNextIcon />
+        </IconButton>
+      </div>
+      <div>
+        <IconButton onClick={onSpeakHandler}>
+          <VolumeUp />
+        </IconButton>
+        <IconButton
+          onClick={onShuffleHandler}
+          color={isShuffleOn ? 'primary' : 'default'}
+        >
+          {isShuffleOn ? <ShuffleOnIcon /> : <ShuffleIcon />}
         </IconButton>
       </div>
     </>
