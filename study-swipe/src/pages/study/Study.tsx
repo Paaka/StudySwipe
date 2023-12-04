@@ -42,7 +42,6 @@ const Study = () => {
   };
 
   useEffect(() => {
-    console.log('test', animate);
     const handleKeyDownEvent = (event: KeyboardEvent) => handleKeyDown(event);
 
     window.addEventListener('keydown', handleKeyDownEvent);
@@ -101,7 +100,7 @@ const Study = () => {
   };
 
   return (
-    <>
+    <div className="study-containter">
       <div className="study-header">
         <Link to={getlinkToReturn()}>
           <IconButton color="primary">
@@ -114,7 +113,7 @@ const Study = () => {
           <NavigateBeforeIcon />
         </IconButton>
         <div>
-          <h3>{currentKeyword}</h3>
+          <h3 className="study__heading">{currentKeyword}</h3>
           <Card
             className={`study-card ${animate ? 'animate' : ''}`}
             onClick={flipCard}
@@ -144,7 +143,7 @@ const Study = () => {
           {isShuffleOn ? <ShuffleOnIcon /> : <ShuffleIcon />}
         </IconButton>
       </div>
-    </>
+    </div>
   );
 };
 
